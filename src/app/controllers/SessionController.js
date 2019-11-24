@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 import User from '../models/User';
+import authConfig from '../../config/auth';
 
 class SessionController {
   async store(req, res) {
@@ -27,8 +28,8 @@ class SessionController {
       // https://www.md5online.org
       // to generate the encryption string
       // gobarberrocketseatnode2 is : f29618255c309de4469993cce24286ea
-      token: jwt.sign({ id }, 'f29618255c309de4469993cce24286ea', {
-        expiresIn: '7d',
+      token: jwt.sign({ id }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn,
       }),
     });
   }
