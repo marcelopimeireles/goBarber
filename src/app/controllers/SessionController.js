@@ -18,7 +18,7 @@ class SessionController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { email, password, avatar } = req.body;
+    const { email, password } = req.body;
 
     const user = await User.findOne({
       where: { email },
@@ -39,7 +39,7 @@ class SessionController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name } = user;
+    const { id, name, avatar } = user;
 
     return res.json({
       user: {
