@@ -32,9 +32,14 @@ class User extends Model {
     // this.hasMan(models.File, { foreignKey: 'avatar_id' });
   }
 
-  checkPassword(password) {
-    // console.log(password, this.password_hash);
-    return bcrypt.compare(password, this.password_hash);
+  async checkPassword(password) {
+    const isTheSame = await bcrypt
+      .compare(password, this.password_hash)
+      .then(result => {
+        return result;
+      });
+
+    return isTheSame;
   }
 }
 
